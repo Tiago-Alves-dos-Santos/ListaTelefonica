@@ -48,4 +48,8 @@
     <li>npm install -g cross-env</li>
 </ol>
 
-<p style="text-align: justify">Apos executar os comandos acima, entre no seu SGBD crie um banco de dados com nome <span style='color:green'>lista-telefonica</span> e faça a importação do arquivo banco/lista-telefonica.sql para o mesmo. Caso altere o nome do banco ou seus dados locais possuem alguma confifuração diferente do padrão configure o arquiv <span style='color:green'>.env</span> </p>
+<p style="text-align: justify">Apos executar os comandos acima, entre no seu SGBD crie um banco de dados com nome <span style='color:#228B22'>lista-telefonica</span> e faça a importação do arquivo banco/lista-telefonica.sql para o mesmo. Caso altere o nome do banco ou seus dados locais possuem alguma confifuração diferente do padrão configure o arquiv <span style='color:#228B22'>.env</span> </p>
+
+### Nota: Nada acima ira funcionar se você não tiver o php >= 7 instalado na sua maquina
+
+<h4> Instale o php e outras depencias como mysql pelo <a href="">xampp</a>!</h4>

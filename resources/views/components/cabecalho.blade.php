@@ -1,6 +1,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{--  icone da aplicação  --}}
+    <link rel="icon" href="{{asset('img/30x30.png')}}"/>
     @if($titulo == "")
     <title>Lista Telefonica</title>
     @else
