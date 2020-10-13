@@ -14,7 +14,10 @@ class Telefone extends Model
     public $timestamps = true;
     const CREATED_AT = 'criado';
     const UPDATED_AT = 'alterado';
-    //pra inserção em massa
     protected $guarded = [];
+
+    public function pessoa(){
+        return $this->belongsTo(Pessoa::class);
+    }
     //fim config models
 }

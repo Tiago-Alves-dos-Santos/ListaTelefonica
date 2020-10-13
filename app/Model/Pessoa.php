@@ -14,7 +14,10 @@ class Pessoa extends Model
     public $timestamps = true;
     const CREATED_AT = 'criado';
     const UPDATED_AT = 'alterado';
-    //pra inserção em massa
     protected $guarded = [];
+
+    public function telefone(){
+        return $this->hasMany(Telefone::class);
+    }
     //fim config models
 }
