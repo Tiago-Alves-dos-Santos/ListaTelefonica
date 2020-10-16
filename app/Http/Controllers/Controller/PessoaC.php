@@ -105,4 +105,18 @@ class PessoaC extends Controller
             return [];
         }
     }
+
+    public function deletar(Request $req){
+        $telefone = Telefone::find($req->id);
+        $pessoa = Pessoa::find($telefone->pessoa_id);
+        $quantidade = Telefone::where("pessoa_id", $pessoa->id)->count();
+        if($quantidade > 1){
+            $telefone->forceDelete();
+        }else{
+            $telefone->forceDelete();
+            $pessoa->forceDelete();
+        }
+        return [];
+
+    }
 }

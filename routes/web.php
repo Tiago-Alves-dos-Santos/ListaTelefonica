@@ -19,6 +19,8 @@ Route::prefix("/contato")->group(function(){
     Route::get('/datalist-dados', 'Controller\PessoaC@dataListRequest')->name('pessoa.ajax.datalist');
     //alterar um contato
     Route::post('/editar-contato','Controller\PessoaC@alterarContato')->name('pessoa.ajax.update');
+    //deletar um contato
+    Route::post('/deletar', 'Controller\PessoaC@deletar')->name('pessoa.ajax.delete');
 });
 
 //Route::prefix("/app")->group(function(){

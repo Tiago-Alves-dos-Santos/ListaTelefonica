@@ -23,7 +23,7 @@
                             <td class="column3 linha-{{$a->id_telefone}}">{{$a->operadora}}</td>
                             <td class="column4 d-flex align-content-start">
                                 <a href="" id="alterar-{{$a->id_telefone}}" class="btn btn-warning mt-2 mb-2 alterar" data-linha="{{$a->id_telefone}}">Alterar</a>
-                                <a href="" class="btn btn-danger mt-2 ml-2 mb-2">Excluir</a>
+                                <a href="" class="btn btn-danger mt-2 ml-2 mb-2 excluir" data-id="{{$a->id_telefone}}">Excluir</a>
                             </td>
                         </tr>
                     @empty
@@ -165,6 +165,49 @@
                 });
             }
         });
+        //excluir um registro
+        $("a.excluir").bind('click', function(e){
+            e.preventDefault();
+            let id = $(this).attr('data-id');
+            $.msgbox({
+                'message': 'Deseja realmente excluir esse contato da agenda?',
+                'type': 'confirm',
+                'callback': function (result) {
+                    if(result){
+                        $("#tabela-agenda-load").show('fast');
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{route('pessoa.ajax.delete')}}",
+                            data: {
+                                "_token": "{{csrf_token()}}",
+                                "id": id
+                            },
+                            success: function (e) {
+                                if($.isEmptyObject(e)){
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: "{{$agenda->url($agenda->currentPage())}}",
+                                        success: function (e) {
+                                            //mudar o container
+                                            $("#tabela-agenda").empty().html(e);
+                                            $.msgbox({
+                                                'message': 'Contato deletado com sucesso!',
+                                                'type': 'info'
+                                            });
+                                        },
+                                        error: function (e) {
 
+                                        }
+                                    });
+                                }
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    }
+                }
+            });
+        });
     });
 </script>
