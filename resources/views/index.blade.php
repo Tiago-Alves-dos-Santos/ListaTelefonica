@@ -51,8 +51,7 @@
                             {{--                                <i class="fas fa-check"></i>--}}
                             <button class="btn btn-block btn-azul" id="btn-add-contato"><span
                                     id="texto-btn-add">Salvar</span> <img src="{{asset('img/load-form.gif')}}"
-                                                                          class="img-load-form" id="img-add" width="30"
-                                                                          height="30"/></button>
+                                     class="img-load-form img-fluid" id="img-add"/></button>
                         </div>
                     </div>
                 </form>

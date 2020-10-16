@@ -11,16 +11,18 @@
                         <th class="column4">Ação</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="position: relative">
+                    @component('components.load-tabela',['id'=>'tabela-agenda-load'])
+                    @endcomponent
                     @forelse($agenda as $a)
                         @php
                             @endphp
                         <tr>
                             <td class="column1 linha-{{$a->id_telefone}}">{{$a->nome}}</td>
-                            <td class="column2 linha-{{$a->id_telefone}}">{{$a->numero}}</td>
+                            <td class="column2 linha-{{$a->id_telefone}}" data-numero="{{$a->numero}}">{{$a->numero}}</td>
                             <td class="column3 linha-{{$a->id_telefone}}">{{$a->operadora}}</td>
                             <td class="column4 d-flex align-content-start">
-                                <a href="" id="alterar" class="btn btn-warning mt-2 mb-2" data-linha="{{$a->id_telefone}}">Alterar</a>
+                                <a href="" id="alterar-{{$a->id_telefone}}" class="btn btn-warning mt-2 mb-2 alterar" data-linha="{{$a->id_telefone}}">Alterar</a>
                                 <a href="" class="btn btn-danger mt-2 ml-2 mb-2">Excluir</a>
                             </td>
                         </tr>
@@ -32,20 +34,23 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-md-6 d-flex justify-content-md-end justify-content-sm-center">
+                    <h6>{{$registros}} / {{$agenda->total()}}</h6>
+                </div>
+                <div class="col-md-6 d-flex justify-content-md-end justify-content-center" id="pagina-agenda">
+                    {{$agenda->links()}}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-<div class="row" style="margin-top: 20px">
-    <div class="col-md-12 d-flex justify-content-md-end justify-content-center" id="pagina-agenda">
-        {{$agenda->links()}}
     </div>
 </div>
 {{--requisiçoes e plugins--}}
 <script>
     $(function(){
         $("#tabela-agenda").tablesorter();
-
+        //esconder load da tabela
+        $("#tabela-agenda-load").hide();
         //paginação com ajax
         //colocar classe active no link clicado
         $('span.page-link').click(function () {
@@ -55,6 +60,7 @@
         //ajax paginação
         $('.pagination .page-link').click(function (e) {
             e.preventDefault();
+            $("#tabela-agenda-load").show('fast');
             let urls = $(this).attr('href');
             $.ajax({
                 type: 'GET',
@@ -70,11 +76,13 @@
             });
         });
         //alterar campos, colocar impute na linha clicada
-        $("a#alterar").bind('click',function(e){
+        $("a.alterar").bind('click',function(e){
             e.preventDefault();
+            let id_btn = $(this).attr('id');
             let linha = ".linha-"+$(this).attr('data-linha');
             let nome = $(linha).eq(0).html();
             let numero = $(linha).eq(1).html();
+            let numero_antigo = $(linha).eq(1).attr('data-numero');
             let operadora = $(linha).eq(2).html();
             if($(this).html() == "Alterar"){
                 $(linha).eq(0).html(
@@ -88,7 +96,45 @@
                 );
                 $(this).html("Salvar");
             }else if($(this).html() == "Salvar"){
-                alert("ola salvar");
+                $(this).html('Aguarde <img src="{{asset('img/load-form.gif')}}" class="img-load-form img-fluid" />');
+                let input_nome = $(linha+" input").eq(0).val();
+                let input_numero = $(linha+" input").eq(1).val();
+                let input_operadora = $(linha+" input").eq(2).val();
+                $(this).attr('disabled', true);
+                $.ajax({
+                    type:'POST',
+                    url: "{{route('pessoa.ajax.update')}}",
+                    data:{
+                        "nome": input_nome,
+                        "numero": input_numero,
+                        "numero_antigo": numero_antigo,
+                        "operadora": input_operadora,
+                        "_token": "{{csrf_token()}}"
+                    },
+                    complete:function (e) {
+                        $(this).removeAttr('disabled');
+                        $(id_btn).empty().html("Salvar");
+                    },
+                    success:function (e) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{$agenda->url($agenda->currentPage())}}",
+                            success:function (tabela) {
+                                $("#tabela-agenda").empty().html(tabela);
+                                console.log(tabela);
+                                $.msgbox({
+                                    'message': 'Alteração realizada com sucesso!',
+                                    'type': 'info'
+                                });
+                            }
+                        });
+
+                    },
+                    error:function (e) {
+                        console.log(e.responseJSON.message);
+
+                    }
+                });
             }
         });
 

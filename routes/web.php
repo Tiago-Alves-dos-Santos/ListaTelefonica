@@ -15,7 +15,10 @@ Route::get('/', 'Controller\PessoaC@homepage')->name('inicio');
 Route::prefix("/contato")->group(function(){
     //salvar um novo conto ou adioconar um numero a um existente
     Route::post('/novo-contato', 'Controller\PessoaC@salvarContato')->name('pessoa.create.contato');
+    //requisiçao para preencher o autocomplete
     Route::get('/datalist-dados', 'Controller\PessoaC@dataListRequest')->name('pessoa.ajax.datalist');
+    //alterar um contato
+    Route::post('/editar-contato','Controller\PessoaC@alterarContato')->name('pessoa.ajax.update');
 });
 
 //Route::prefix("/app")->group(function(){

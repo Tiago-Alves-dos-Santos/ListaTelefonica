@@ -42,7 +42,36 @@ div{
     text-align: center;
     font-size: 40px;
 }
+//load de tabelas
+.load-tabela{
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.51);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-flow: row wrap;
 
+}
+.load-tabela h1{
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+.load-tabela .img-load-tabela{
+    text-align: center;
+    width: 100px;
+}
+
+//img load form
+.img-load-form{
+    width: 30px;
+    height: 30px;
+}
+//botoes
 .btn-azul{
     background-color: $azul2;
     border: 1px solid $azul2;

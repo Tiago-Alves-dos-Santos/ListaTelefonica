@@ -16,14 +16,14 @@ class PessoaC extends Controller
         $agenda = Pessoa::join('telefone','pessoa.id','=','telefone.pessoa_id')
             ->select('*', 'telefone.id as id_telefone')
             ->orderBy('pessoa.nome')->paginate(Configuracao::PAGINAS);
+        $registros = Configuracao::mapPaginate($agenda);
         if($req->ajax()){
-
-            return view('includes.tabela-agenda', compact('agenda'));
+            return view('includes.tabela-agenda', compact('agenda','registros'));
         }
         //carregar pessoas no datalist sem ser por requisição
         $pessoas = Pessoa::groupBy('nome')->orderBy('nome')->limit(10)->get();
         //carregar tabelas de contatos salvos
-       return view('index', compact('pessoas','agenda'));
+       return view('index', compact('pessoas','agenda','registros'));
     }
 
     public function salvarContato(Request $req){
@@ -69,6 +69,18 @@ class PessoaC extends Controller
         if($req->ajax()){
             return Pessoa::where('nome','like', "%".$req->nome."%")
                 ->orderBy('nome')->limit(15)->get();
+        }
+    }
+
+    public function alterarContato(Request $req){
+        if($req->ajax()){
+            $telefone = Telefone::where('numero', $req->numero_antigo)->first();
+            $telefone->numero = $req->numero;
+            $telefone->operadora = $req->operadora;
+            $telefone->pessoa->nome = $req->nome;
+            $telefone->save();
+            $telefone->pessoa->save();
+            return [];
         }
     }
 }
