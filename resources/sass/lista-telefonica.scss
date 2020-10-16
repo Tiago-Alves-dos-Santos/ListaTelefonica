@@ -1,1 +1,71 @@
-@import '~bootstrap/scss/bootstrap';
+@charset "utf-8";
+// @import '~bootstrap/scss/bootstrap';
+/** font-family: 'PT Sans Narrow', sans-serif */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+// import scss cores do sistema
+@import 'cores';
+//import plugins
+@import "plugin";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+div{
+    position: relative;
+    box-sizing: border-box;
+}
+
+//PAgina de load inicial
+.load-page-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: $load-page;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    z-index: 100;
+}
+.load-page-background h1{
+    color: $cor-titulo;
+    text-align: center;
+    font-size: 40px;
+}
+
+.btn-azul{
+    background-color: $azul2;
+    border: 1px solid $azul2;
+    color: white;
+    &:hover {
+        background-color: $azul;
+        border: 1px solid $azul;
+        color: white;
+    }
+}
+@mixin btn-azverde(){
+    background-color: $azul-verde;
+    border: 1px solid $azul-verde;
+    color: white;
+}
+.btn-outline-azverde{
+    background-color: white;
+    border: 1px solid $azul-verde;
+    color: $azul-verde;
+    &:hover{
+        @include btn-azverde;
+    }
+}
+//imports css
+@import 'index';
+

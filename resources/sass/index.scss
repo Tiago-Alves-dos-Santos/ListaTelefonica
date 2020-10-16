@@ -1,0 +1,27 @@
+div.fildset{
+    border: 3px solid $azul2;
+    padding: 10px;
+    h4.fildset-title{
+        position: absolute;
+        background-color: #fff;
+        padding: 5px;
+        top: -20px;
+        left: 10px;
+    }
+}
+a#opcao-adicionar, a#opcao-filtrar{
+    width: 200px;
+}
+a#opcao-adicionar{
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+a#opcao-filtrar{
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+a.opcao-selecionada{
+    @include btn-azverde;
+}

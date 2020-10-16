@@ -41,6 +41,16 @@
 
 
 ## Como rodar o sitema localmente
+
+### Requisitos para o sistema rodar no sua maquina
+
+<ol>
+    <li>php >= 7, use o <a href="">xampp</a></li>
+    <li>Node js e Npm <a href="https://nodejs.org/en/">instalados na maquina</a></li>
+</ol>
+
+
+### Explicando as etapas
 <p style="text-align: justify">Ao fazer o clone do projeto ou apenas o download você devera acessar a pasta do sistema pelo terminal e executar os comandos abaixo para instalar a node_modules:</p>
 
 <ol>
@@ -49,7 +59,3 @@
 </ol>
 
 <p style="text-align: justify">Apos executar os comandos acima, entre no seu SGBD crie um banco de dados com nome <span style='color:#228B22'>lista-telefonica</span> e faça a importação do arquivo banco/lista-telefonica.sql para o mesmo. Caso altere o nome do banco ou seus dados locais possuem alguma confifuração diferente do padrão configure o arquiv <span style='color:#228B22'>.env</span> </p>
-
-### Nota: Nada acima ira funcionar se você não tiver o php >= 7 instalado na sua maquina
-
-<h4> Instale o php e outras depencias como mysql pelo <a href="">xampp</a>!</h4>

@@ -20,4 +20,25 @@ class Pessoa extends Model
         return $this->hasMany(Telefone::class);
     }
     //fim config models
+    /**
+     * @param $coluna
+     * @param $valor
+     * @param bool $retornarObjeto
+     * @return mixed
+     */
+    public function vericarExistencia($coluna, $valor, $retornarObjeto = false){
+        $existe = Pessoa::where($coluna,$valor)->exists();
+        if($retornarObjeto && $existe){
+            return Pessoa::where($coluna,$valor)->first();
+        }else{
+            return $existe;
+        }
+    }
+
+    public function creates(){
+        $pessoas =  Pessoa::create([
+           "nome" => $this->nome
+        ]);
+        return $pessoas->fresh();
+    }
 }

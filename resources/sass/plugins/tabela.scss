@@ -1,0 +1,326 @@
+//Perfect scroolbar
+/*
+ * Container style
+ */
+.ps {
+    overflow: hidden !important;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+}
+
+/*
+ * Scrollbar rail styles
+ */
+.ps__rail-x {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    height: 15px;
+    /* there must be 'bottom' or 'top' for ps__rail-x */
+    bottom: 0px;
+    /* please don't change 'position' */
+    position: absolute;
+}
+
+.ps__rail-y {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    -webkit-transition: background-color .2s linear, opacity .2s linear;
+    width: 15px;
+    /* there must be 'right' or 'left' for ps__rail-y */
+    right: 0;
+    /* please don't change 'position' */
+    position: absolute;
+}
+
+.ps--active-x > .ps__rail-x,
+.ps--active-y > .ps__rail-y {
+    display: block;
+    background-color: transparent;
+}
+
+.ps:hover > .ps__rail-x,
+.ps:hover > .ps__rail-y,
+.ps--focus > .ps__rail-x,
+.ps--focus > .ps__rail-y,
+.ps--scrolling-x > .ps__rail-x,
+.ps--scrolling-y > .ps__rail-y {
+    opacity: 0.6;
+}
+
+.ps__rail-x:hover,
+.ps__rail-y:hover,
+.ps__rail-x:focus,
+.ps__rail-y:focus {
+    background-color: #eee;
+    opacity: 0.9;
+}
+
+/*
+ * Scrollbar thumb styles
+ */
+.ps__thumb-x {
+    background-color: #aaa;
+    border-radius: 6px;
+    transition: background-color .2s linear, height .2s ease-in-out;
+    -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+    height: 6px;
+    /* there must be 'bottom' for ps__thumb-x */
+    bottom: 2px;
+    /* please don't change 'position' */
+    position: absolute;
+}
+
+.ps__thumb-y {
+    background-color: #aaa;
+    border-radius: 6px;
+    transition: background-color .2s linear, width .2s ease-in-out;
+    -webkit-transition: background-color .2s linear, width .2s ease-in-out;
+    width: 6px;
+    /* there must be 'right' for ps__thumb-y */
+    right: 2px;
+    /* please don't change 'position' */
+    position: absolute;
+}
+
+.ps__rail-x:hover > .ps__thumb-x,
+.ps__rail-x:focus > .ps__thumb-x {
+    background-color: #999;
+    height: 11px;
+}
+
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y {
+    background-color: #999;
+    width: 11px;
+}
+
+/* MS supports */
+@supports (-ms-overflow-style: none) {
+    .ps {
+        overflow: auto !important;
+    }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .ps {
+        overflow: auto !important;
+    }
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+
+
+.container-table100 {
+    margin-top: 50px;
+    width: 100%;
+    min-height: 100vh;
+    //background: #c850c0;
+    //background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+    //background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+    //background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+    //background: linear-gradient(45deg, #4158d0, #c850c0);
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    //padding: 33px 30px;
+}
+
+.wrap-table100 {
+    width: 1170px;
+}
+
+table {
+    border-spacing: 1px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid $azul3;
+}
+table * {
+    position: relative;
+
+}
+table td, table th {
+    padding-left: 8px;
+}
+table thead tr {
+    height: 60px;
+    background: $azul2;
+}
+table tbody tr {
+    height: 50px;
+}
+table tbody tr:last-child {
+    border: 0;
+}
+table td, table th {
+    text-align: left;
+}
+table td.l, table th.l {
+    text-align: right;
+}
+table td.c, table th.c {
+    text-align: center;
+}
+table td.r, table th.r {
+    text-align: center;
+}
+
+
+.table100-head th{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+tbody tr {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
+    color: #808080;
+    line-height: 1.2;
+    font-weight: unset;
+}
+
+tbody tr:hover {
+    color: #555555;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.column1 {
+    width: 260px;
+    padding-left: 40px;
+}
+
+.column2 {
+    width: 245px;
+}
+
+.column3 {
+    width: 160px;
+}
+
+.column4 {
+    width: 110px;
+    text-align: center;
+}
+
+.column5 {
+    width: 170px;
+    text-align: right;
+}
+
+.column6 {
+    width: 222px;
+    text-align: right;
+    padding-right: 62px;
+}
+
+
+@media screen and (max-width: 992px) {
+    table {
+        display: block;
+    }
+    table > *, table tr, table td, table th {
+        display: block;
+    }
+    table thead {
+        display: none;
+    }
+    table tbody tr {
+        height: auto;
+        padding: 37px 0;
+    }
+    table tbody tr td {
+        padding-left: 40% !important;
+        margin-bottom: 24px;
+    }
+    table tbody tr td:last-child {
+        margin-bottom: 0;
+    }
+    table tbody tr td:before {
+        font-family: 'PT Sans Narrow', sans-serif;
+        font-size: 12px;
+        color: #999999;
+        line-height: 1.2;
+        font-weight: unset;
+        position: absolute;
+        width: 40%;
+        left: 30px;
+        top: 0;
+    }
+    table tbody tr td:nth-child(1):before {
+        content: "Nome";
+    }
+    table tbody tr td:nth-child(2):before {
+        content: "Telefone";
+    }
+    table tbody tr td:nth-child(3):before {
+        content: "Operadora";
+    }
+    table tbody tr td:nth-child(4):before {
+        content: "Ação";
+    }
+    table tbody tr td:nth-child(5):before {
+        content: "Quantity";
+    }
+    table tbody tr td:nth-child(6):before {
+        content: "Total";
+    }
+
+
+
+    .column1,
+    .column2,
+    .column3,
+    .column4{
+        width: 100%;
+        text-align: left;
+        font-size: 15px;
+    }
+    .column4::before{
+        line-height: 50px;
+    }
+    .column1::before,
+    .column2::before,
+    .column3::before,
+    .column4::before{
+        text-align: left;
+        font-size: 20px;
+    }
+
+    tbody tr {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-table100 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
