@@ -3,7 +3,7 @@ namespace App\Classes;
 
 class Configuracao
 {
-    const PAGINAS = 3;
+    const PAGINAS = 10;
 
     public static function mapPaginate($consultaPaginate){
 

@@ -18,7 +18,7 @@
                         @php
                             @endphp
                         <tr>
-                            <td class="column1 linha-{{$a->id_telefone}}">{{$a->nome}}</td>
+                            <td class="column1 linha-{{$a->id_telefone}}" data-nome="{{$a->nome}}">{{$a->nome}}</td>
                             <td class="column2 linha-{{$a->id_telefone}}" data-numero="{{$a->numero}}">{{$a->numero}}</td>
                             <td class="column3 linha-{{$a->id_telefone}}">{{$a->operadora}}</td>
                             <td class="column4 d-flex align-content-start">
@@ -81,6 +81,7 @@
             let id_btn = $(this).attr('id');
             let linha = ".linha-"+$(this).attr('data-linha');
             let nome = $(linha).eq(0).html();
+            let nome_antigo = $(linha).eq(0).attr('data-nome');
             let numero = $(linha).eq(1).html();
             let numero_antigo = $(linha).eq(1).attr('data-numero');
             let operadora = $(linha).eq(2).html();
@@ -92,20 +93,32 @@
                     "<input type='text' value='"+numero+"' name='numero' class='form-control'/>"
                 );
                 $(linha).eq(2).html(
-                    "<input type='text' value='"+operadora+"' name='numero' class='form-control'/>"
+                    "<select class='custom-select'>" +
+                    "<option value='TIM' >Tim</option>"+
+                    "<option value='CLARO' >Claro</option>"+
+                    "<option value='VIVO'>Vivo</option>"+
+                    "<option value='OI'>Oi</option>"+
+                    "</select>"
                 );
+                //lãço para selecionar a opçao ja escolhida
+                for(let i = 0; i < $(linha+" select option").length; i++){
+                    if(operadora == $(linha+" select option").eq(i).val()){
+                        $(linha+" select option").eq(i).attr('selected','selected');
+                    }
+                }
                 $(this).html("Salvar");
             }else if($(this).html() == "Salvar"){
                 $(this).html('Aguarde <img src="{{asset('img/load-form.gif')}}" class="img-load-form img-fluid" />');
                 let input_nome = $(linha+" input").eq(0).val();
                 let input_numero = $(linha+" input").eq(1).val();
-                let input_operadora = $(linha+" input").eq(2).val();
+                let input_operadora = $(linha+" select").val();
                 $(this).attr('disabled', true);
                 $.ajax({
                     type:'POST',
                     url: "{{route('pessoa.ajax.update')}}",
                     data:{
                         "nome": input_nome,
+                        "nome_antigo": nome_antigo,
                         "numero": input_numero,
                         "numero_antigo": numero_antigo,
                         "operadora": input_operadora,
@@ -116,18 +129,33 @@
                         $(id_btn).empty().html("Salvar");
                     },
                     success:function (e) {
-                        $.ajax({
-                            type: 'GET',
-                            url: "{{$agenda->url($agenda->currentPage())}}",
-                            success:function (tabela) {
-                                $("#tabela-agenda").empty().html(tabela);
-                                console.log(tabela);
-                                $.msgbox({
-                                    'message': 'Alteração realizada com sucesso!',
-                                    'type': 'info'
-                                });
-                            }
-                        });
+                        if($.isEmptyObject(e)){
+                            $.ajax({
+                                type: 'GET',
+                                url: "{{$agenda->url($agenda->currentPage())}}",
+                                success:function (tabela) {
+                                    $("#tabela-agenda").empty().html(tabela);
+                                    console.log(tabela);
+                                    $.msgbox({
+                                        'message': 'Alteração realizada com sucesso!',
+                                        'type': 'info'
+                                    });
+                                }
+                            });
+                        }else{
+                            let json = JSON.parse(e);
+                            $.ajax({
+                                type: 'GET',
+                                url: "{{$agenda->url($agenda->currentPage())}}",
+                                success:function (tabela) {
+                                    $("#tabela-agenda").empty().html(tabela);
+                                }
+                            });
+                            $.msgbox({
+                                'message': json.msg,
+                                'type': json.tipo
+                            });
+                        }
 
                     },
                     error:function (e) {

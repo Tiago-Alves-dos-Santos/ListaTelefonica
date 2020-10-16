@@ -74,6 +74,28 @@ class PessoaC extends Controller
 
     public function alterarContato(Request $req){
         if($req->ajax()){
+            $telefones = new Telefone();
+            if($req->nome != $req->nome_antigo){
+                $pessoa = Pessoa::where('nome', $req->nome)->exists();
+                if($pessoa){
+                    session(['msg' => [
+                        'tipo' => 'error',
+                        'msg' => 'Nome a ser alterado já existente, tente outro numero ou vá em adicionar e adicione o numero ao contato desejado!'
+                    ]]);
+                    return json_encode(session('msg'));
+                }
+            }
+            if($req->numero != $req->numero_antigo){
+                $telefon = $telefones->vericarExistencia('numero',$req->numero);
+                if($telefon){
+                    session(['msg' => [
+                        'tipo' => 'error',
+                        'msg' => 'Não foi possivel alterar o numero, pois o mesmo já é existente na agenda!'
+                    ]]);
+                    return json_encode(session('msg'));
+                }
+            }
+
             $telefone = Telefone::where('numero', $req->numero_antigo)->first();
             $telefone->numero = $req->numero;
             $telefone->operadora = $req->operadora;
