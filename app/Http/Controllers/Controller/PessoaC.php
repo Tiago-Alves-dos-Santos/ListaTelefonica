@@ -35,7 +35,7 @@ class PessoaC extends Controller
         $telefone = $telefones->vericarExistencia('numero',$req->numero);
         if($telefone){
             session(['msg' => [
-                'tipo' => 'info',
+                'tipo' => 'error',
                 'msg' => 'Telefone ja existente impossivel cadastrar!'
             ]]);
         }else if($pessoa != false && !$telefone){//se pessoa existir e telefone nao, adicionar telefone a pessoa

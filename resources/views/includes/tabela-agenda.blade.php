@@ -35,7 +35,7 @@
                 </table>
             </div>
             <div class="row" style="margin-top: 20px">
-                <div class="col-md-6 d-flex justify-content-md-end justify-content-sm-center">
+                <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
                     <h6>{{$registros}} / {{$agenda->total()}}</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end justify-content-center" id="pagina-agenda">
