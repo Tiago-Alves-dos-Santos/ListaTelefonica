@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-2 d-flex align-content-center flex-wrap mt-2 ">
                             {{--                                <i class="fas fa-check"></i>--}}
-                            <button class="btn btn-block btn-azul" id="btn-add-contato"><span
+                            <button type="submit" class="btn btn-block btn-azul" id="btn-add-contato"><span
                                     id="texto-btn-add">Salvar</span> <img src="{{asset('img/load-form.gif')}}"
                                      class="img-load-form img-fluid" id="img-add"/></button>
                         </div>
@@ -63,16 +63,27 @@
     <div class="row" style="margin-top: 50px" id="buscar">
         <div class="col-md-12">
             @component('components.fieldset', ['titulo' => 'Buscar'])
-                <form method="post" action="" id="form-busca">
+                <form method="post" action="{{route('pessoa.ajax.filtro')}}" id="form-busca">
                     @csrf
                     <div class="form-row">
-                        <div class="col-md-8">
+{{--                        <div class="col-md-8">--}}
+{{--                            <label>Procure por um contato </label>--}}
+{{--                            <input name="busca" type="text" class="form-control" placeholder="Buscar... " required/>--}}
+{{--                        </div>--}}
+
+                        <div class="col-md-12">
                             <label>Procure por um contato </label>
-                            <input name="nome" type="text" class="form-control" placeholder="Buscar... " required/>
+                            <div class="input-group">
+                                <input name="busca" type="text" class="form-control" placeholder="Buscar... " required/>
+                                <div class="input-group-append">
+                                    <button style="width: 150px" type="submit" class="btn btn-block btn-azul"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4 d-flex align-content-end flex-wrap mt-2">
-                            <button class="btn btn-block btn-azul"><i class="fas fa-search"></i></button>
-                        </div>
+
+{{--                        <div class="col-md-4 d-flex align-content-end flex-wrap mt-2">--}}
+{{--                            <button type="submit" class="btn btn-block btn-azul"><i class="fas fa-search"></i></button>--}}
+{{--                        </div>--}}
                     </div>
                 </form>
             @endcomponent
@@ -118,7 +129,7 @@
                         'type': json.tipo
                     });
                     @php
-                        session()->pull('msg');
+                        session()->forget('msg');
                     @endphp
                     <!--requisiçaõ de consulta apos um cadastro de usuario-->
                     $.ajax({
@@ -175,7 +186,27 @@
             let palavra = item.label.replace(expressao, "<span style='font-weight:bolder; color:rgba(36, 103, 145, 1)'>" + this.term + "</span>");
             return $("<li><div><span>" + palavra + "</span></div></li>").appendTo(ul);
         };
+
+        //requisição buscar
+        $("form#form-busca").bind('submit',function (e) {
+            e.preventDefault();
+            let dados = $(this).serialize();
+            $("#tabela-agenda-load").show('fast');
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: dados,
+                success:function(e){
+                    $("#tabela-agenda").empty().html(e);
+                },
+                error:function (e) {
+                    console.log(e);
+                }
+            });
+        });
     </script>
 @endcomponent
+{{--destroi sessao de msg--}}
+
 </body>
 </html>

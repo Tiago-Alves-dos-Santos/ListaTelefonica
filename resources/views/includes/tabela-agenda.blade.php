@@ -28,18 +28,41 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="column1" style="text-align: center" colspan="4">Agenda Vazia</td>
+                            @if(isset($filtro) && $agenda->total() == 0)
+                                <td class="column1" style="text-align: center" colspan="4">
+                                    O dado buscado <span style="color: red">{{$filtro['busca']}}</span> não foi
+                                    encontrado dentre os contatos da agenda! <a href="" class="btn btn-info btn-voltar-inicio">Voltar ao inicio</a>
+                                </td>
+                            @else
+                                <td class="column1" style="text-align: center" colspan="4">Nenhum contato encontrado!</td>
+                            @endif
+
                         </tr>
                     @endforelse
                     </tbody>
                 </table>
             </div>
+
+            @if(isset($filtro) && $agenda->total() > 0)
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <a href="" class="btn btn-info btn-block btn-voltar-inicio">Voltar ao inicio</a>
+                    </div>
+                </div>
+            @endif
+
             <div class="row" style="margin-top: 20px">
                 <div class="col-md-6 d-flex justify-content-md-end justify-content-center">
-                    <h6>{{$registros}} / {{$agenda->total()}}</h6>
+                    @if($agenda != null)
+                        <h6>{{$registros}} / {{$agenda->total()}}</h6>
+                     @endif
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end justify-content-center" id="pagina-agenda">
-                    {{$agenda->links()}}
+                    @if(isset($filtro))
+                        {{$agenda->appends($filtro)->onEachSide(5)->links()}}
+                    @else
+                        {{$agenda->onEachSide(5)->links()}}
+                    @endif
                 </div>
             </div>
         </div>
@@ -75,6 +98,25 @@
                 }
             });
         });
+        //btn voltar ao inicio
+        $("a.btn-voltar-inicio").bind('click',function(e){
+            e.preventDefault();
+            $("#tabela-agenda-load").show('fast');
+            $.ajax({
+                type: 'GET',
+                url: "{{route('inicio')}}",
+                success: function (e) {
+                    //mudar o container
+                    $("#tabela-agenda").empty().html(e);
+
+                },
+                error: function (e) {
+
+                }
+            });
+        });
+
+
         //alterar campos, colocar impute na linha clicada
         $("a.alterar").bind('click',function(e){
             e.preventDefault();

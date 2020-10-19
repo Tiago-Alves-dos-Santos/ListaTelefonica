@@ -4,24 +4,28 @@
 
 ## Sobre o sistema Lista Telefonica
 
-<p align="justify"> Nesse espaço colocaremos uma descrição, quando tivermos mais tempo! link de acesso: <a href="">Lista Telefonica</a></p>
+<p style="text-align: justify">O sistema Lista Telefonica, em resumo, serve para salvar e gerenciar seus contatos! </p>
 
 ### Tecnologias Usadas
-<p align="justify"> Em resumo para o desenvolvimento deste projeto foi usado o frameork laravel como artesão da web em conjuntos com outras tenologias como o BootStrap 4, Jquery, Blade entre outras!</a></p>
-
+<ol>
+<li>Laravel / Blade</li>
+<li> Sass / BootStrap 4 </li>
+<li>Jquery / Ajax</li>
+<li>Mysql</li>
+</ol>
 ## Imagens do projeto
 
 <!-- #### Desktop(WEB)
 <table>
    <tr>
        <td>Tela Inicial</td>
-       <td>Painel de Controle</td>
-       <td>Tela Desenvolvedores</td>
+       <td>Adcionar Contato</td>
+       <td>Buscar Contato</td>
    </tr>
     <tr>
         <td style="width:400px"><img src="readme/homepagePC.png" width="400"/></td>
-        <td style="width:400px"><img src="readme/painelPC.png" width="400"/></td>
-        <td style="width:400px"><img src="readme/desenvolvedoresPC.png" width="400"/></td>
+        <td style="width:400px"><img src="readme/homepage-addPC.png" width="400"/></td>
+        <td style="width:400px"><img src="readme/homepage-buscarPC.png" width="400"/></td>
    </tr>
 </table>
 
@@ -45,17 +49,17 @@
 ### Requisitos para o sistema rodar no sua maquina
 
 <ol>
-    <li>php >= 7, use o <a href="">xampp</a></li>
+    <li>php >= 7.1, use o <a href="">xampp</a></li>
     <li>Node js e Npm <a href="https://nodejs.org/en/">instalados na maquina</a></li>
 </ol>
 
 
 ### Explicando as etapas
-<p style="text-align: justify">Ao fazer o clone do projeto ou apenas o download você devera acessar a pasta do sistema pelo terminal e executar os comandos abaixo para instalar a node_modules:</p>
+<p style="text-align: justify">Após estar com o projeto em sua maquina você devera acessar a pasta do sistema pelo terminal e executar os comandos abaixo para instalar a node_modules:</p>
 
 <ol>
     <li>npm install</li>
     <li>npm install -g cross-env</li>
 </ol>
 
-<p style="text-align: justify">Apos executar os comandos acima, entre no seu SGBD crie um banco de dados com nome <span style='color:#228B22'>lista-telefonica</span> e faça a importação do arquivo banco/lista-telefonica.sql para o mesmo. Caso altere o nome do banco ou seus dados locais possuem alguma confifuração diferente do padrão configure o arquiv <span style='color:#228B22'>.env</span> </p>
+<p style="text-align: justify">Apos executar os comandos acima, entre no seu SGBD crie um banco de dados com nome 'lista-telefonica' e faça a importação do arquivo 'banco/lista-telefonica.sql' para o mesmo. Caso altere o nome do banco ou seus dados locais possuem alguma confifuração diferente do padrão configure o arquivo '.env' </p>

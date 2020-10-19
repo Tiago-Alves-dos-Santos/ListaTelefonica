@@ -119,4 +119,36 @@ class PessoaC extends Controller
         return [];
 
     }
+
+    public function buscar(Request $req){
+        $filtro = $req->except(['_token']);
+        //buscar por nome caso vazio
+        $busca[0] = Pessoa::join('telefone','pessoa.id','=','telefone.pessoa_id')
+            ->select('*', 'telefone.id as id_telefone')
+            ->where('pessoa.nome','like',"%$req->busca%")
+            ->orderBy('pessoa.nome')->paginate(Configuracao::PAGINAS);
+        $busca[1] = Pessoa::join('telefone','pessoa.id','=','telefone.pessoa_id')
+            ->select('*', 'telefone.id as id_telefone')
+            ->where('telefone.numero','like',"%$req->busca%")
+            ->orderBy('pessoa.nome')->paginate(Configuracao::PAGINAS);
+        $busca[2] = Pessoa::join('telefone','pessoa.id','=','telefone.pessoa_id')
+            ->select('*', 'telefone.id as id_telefone')
+            ->where('telefone.operadora','like',"%$req->busca%")
+            ->orderBy('pessoa.nome')->paginate(Configuracao::PAGINAS);
+        $agenda = null;
+        for($i=0; $i < count($busca); $i++){
+            if($busca[$i]->total() > 0){
+                $agenda = $busca[$i];
+                break;
+            }
+        }
+        if($agenda == null){
+            $agenda = $busca[0];
+        }
+        if($req->ajax()){
+            session()->forget('msg');
+            $registros = Configuracao::mapPaginate($agenda);
+            return view('includes.tabela-agenda', compact('agenda','registros','filtro'));
+        }
+    }
 }

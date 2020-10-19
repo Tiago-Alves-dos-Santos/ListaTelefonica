@@ -21,19 +21,7 @@ Route::prefix("/contato")->group(function(){
     Route::post('/editar-contato','Controller\PessoaC@alterarContato')->name('pessoa.ajax.update');
     //deletar um contato
     Route::post('/deletar', 'Controller\PessoaC@deletar')->name('pessoa.ajax.delete');
+    //filtrar agenda
+    Route::match(['get', 'post'], '/filtrar', 'Controller\PessoaC@buscar')->name('pessoa.ajax.filtro');
 });
 
-//Route::prefix("/app")->group(function(){
-//    //pagina inicial do barra app
-//    Route::get('/', function () {
-//        return 'Inicio app';
-//    });
-//    //é como se fosse app/user
-//    Route::get('/user', function () {
-//        return 'User dentro de app';
-//    });
-//    //é como se fosse app/profile
-//    Route::get('/profile', function () {
-//        return 'User dentro de profile';
-//    });
-//});
