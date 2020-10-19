@@ -38,9 +38,9 @@
        <td>Tela Desenvolvedores</td>
    </tr>
     <tr>
-       <td style="width:400px"><img src="readme/homepage.jpg" width="400"/></td>
-       <td style="width:400px"><img src="readme/homepage-add.jpg" width="400"/></td>
-       <td style="width:400px"><img src="readme/homepage-buscar.jpg" width="400"/></td>
+       <td style="width:400px"><img src="readme/homepage.png" width="400"/></td>
+       <td style="width:400px"><img src="readme/homepage-add.png" width="400"/></td>
+       <td style="width:400px"><img src="readme/homepage-buscar.png" width="400"/></td>
    </tr>
 </table>
 
