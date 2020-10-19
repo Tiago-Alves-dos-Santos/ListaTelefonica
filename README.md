@@ -34,8 +34,8 @@
 <table>
    <tr>
        <td>Tela Inicial</td>
-       <td>Painel de Controle</td>
-       <td>Tela Desenvolvedores</td>
+       <td>Adcionar Contato</td>
+       <td>Buscar Contato</td>
    </tr>
     <tr>
        <td style="width:400px"><img src="readme/homepage.png" width="400"/></td>
