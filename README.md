@@ -2,8 +2,8 @@
 
 ## Autor
 <h4><a href="https://github.com/Tiago-Alves-dos-Santos">Tiago-Alves-dos-Santos</a></h4>
-## Sobre o sistema Lista Telefonica
 
+## Sobre o sistema Lista Telefonica
 <p style="text-align: justify">O sistema Lista Telefonica, em resumo, serve para salvar e gerenciar seus contatos! </p>
 
 ### Tecnologias Usadas
