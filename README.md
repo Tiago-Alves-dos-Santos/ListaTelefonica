@@ -1,7 +1,7 @@
 <h1 style='text-align:center;'>Projeto Lista Telefonica</h1>
 
 ## Autor
-
+<h4><a href="https://github.com/Tiago-Alves-dos-Santos">Tiago-Alves-dos-Santos</a></h4>
 ## Sobre o sistema Lista Telefonica
 
 <p style="text-align: justify">O sistema Lista Telefonica, em resumo, serve para salvar e gerenciar seus contatos! </p>
@@ -13,9 +13,10 @@
 <li>Jquery / Ajax</li>
 <li>Mysql</li>
 </ol>
+
 ## Imagens do projeto
 
-<!-- #### Desktop(WEB)
+#### Desktop(WEB)
 <table>
    <tr>
        <td>Tela Inicial</td>
@@ -37,11 +38,11 @@
        <td>Tela Desenvolvedores</td>
    </tr>
     <tr>
-       <td style="width:400px"><img src="readme/homepageCL.jpg" width=""/></td>
-       <td style="width:400px"><img src="readme/painelCL.jpg" width=""/></td>
-        <td style="width:400px"><img src="readme/desenvolvedoresCL.jpg" width=""/></td>
+       <td style="width:400px"><img src="readme/homepage.jpg" width="400"/></td>
+       <td style="width:400px"><img src="readme/homepage-add.jpg" width="400"/></td>
+       <td style="width:400px"><img src="readme/homepage-buscar.jpg" width="400"/></td>
    </tr>
-</table> -->
+</table>
 
 
 ## Como rodar o sitema localmente
